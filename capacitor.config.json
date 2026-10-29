@@ -1,0 +1,6 @@
+{
+  "appId": "com.newsmessagechat.app",
+  "appName": "News message chat",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
