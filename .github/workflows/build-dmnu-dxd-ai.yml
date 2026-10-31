@@ -1,0 +1,29 @@
+name: Build Dmnu DxD AI APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - 'Dmnu-DxD-ai/**'
+      - '.github/workflows/build-dmnu-dxd-ai.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: '8.9'
+          arguments: assembleDebug
+          build-root-directory: Dmnu-DxD-ai
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Dmnu-DxD-ai-debug-apk
+          path: Dmnu-DxD-ai/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
